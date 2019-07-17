@@ -1,4 +1,5 @@
 <?php require 'connect.php';
+session_start();
   if (isset($_POST['submit'])) 
     {
         $name=$_POST['name'];
@@ -15,8 +16,6 @@ if( $stmt === false )
 }
 else
 {
-    echo "done";
-    echo $name,$email,$password,$date;
     header("Location: details.php");
 }
     
@@ -51,13 +50,13 @@ include 'nav.php';
                     <form method="POST" id="signup-form" class="signup-form" action="index.php">
                         <h2 class="form-title">Donor Registration</h2>
                         <div class="form-group">
-                         <input type="text" class="form-input" name="name" id="name" placeholder="Name"/>
+                         <input type="text" class="form-input" name="name" id="name" placeholder="Name" required />
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="email" id="email" placeholder="Email"/>
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Email" required />
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>
+                            <input type="text" class="form-input" name="password" id="password" placeholder="Password" required />
                             <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                         </div>
                         <div class="form-group">

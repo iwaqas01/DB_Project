@@ -5,7 +5,7 @@
 </head>
 <body>
 <?php
-$serverName = "ADMINRG-RVCVKV8\SQL"; 
+$serverName = "ADMINRG-RVCVKV8"; 
 $connectionInfo = array( "Database"=>"bloodbank");
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 

@@ -1,4 +1,6 @@
-<?php require 'connect.php'; ?>
+<?php require 'connect.php'; 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,12 +19,14 @@
          {
             padding-top: 150px;
          }
-         table {
+         table 
+         {
     width: 100%;
     border-collapse: collapse;
-}
+        }   
 
-table, td, th {
+table, td, th 
+{
     border: 1px solid black;
     padding: 5px;
 }
@@ -35,7 +39,7 @@ th {text-align: left;}
     <div class="main">
 
         <section class="signup">
-            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            
             <div class="container">
                
             </div>
@@ -47,11 +51,15 @@ th {text-align: left;}
     <script src="js/main.js"></script>
 <?php
 $q=$_GET['q'];
-$sql = "SELECT donor.name AS name, donor.email AS email,donor.date AS date,donor_details.gender AS gender,donor_details.age AS age,donor_details.phone AS phone,donor_details.address AS address,donor_details.blood AS blood,donor_details.quantity AS quantity FROM donor,donor_details WHERE blood='".$q."' ";
+$sql = "SELECT donor.name AS name, donor.email AS email,donor.date AS date,donor_details.gender AS gender,donor_details.age AS age,donor_details.phone AS phone,donor_details.address AS address,donor_details.blood AS blood,donor_details.quantity AS quantity,donor_details.branch AS branch FROM donor INNER JOIN donor_details ON donor.id=donor_details.id WHERE blood='B+' ";
                             $stmt = sqlsrv_query( $conn, $sql );
                             if( $stmt === false) 
                             {
                             die( print_r( sqlsrv_errors(), true) );
+                            }
+                             if (sqlsrv_has_rows($stmt) != 1) 
+                            {
+                                echo "No Record Found";
                             }
                             echo "<table>
                             <tr>
@@ -63,6 +71,7 @@ $sql = "SELECT donor.name AS name, donor.email AS email,donor.date AS date,donor
                             <th>Address</th>
                             <th>Blood</th>
                             <th>Quantity</th>
+                            <th>Branch</th>
                             </tr>";
                             while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) 
                             {
@@ -76,6 +85,7 @@ $sql = "SELECT donor.name AS name, donor.email AS email,donor.date AS date,donor
                             echo "<td>" . $row['address'] . "</td>";
                             echo "<td>" . $row['blood'] . "</td>";
                             echo "<td>" . $row['quantity'] . "</td>";
+                            echo "<td>" . $row['branch'] . "</td>";
                             echo "</tr>";
                             }
                             echo "</table>";

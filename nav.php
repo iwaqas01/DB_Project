@@ -141,25 +141,25 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+    <!--   <li class="nav-item">
         <a class="nav-link text-white" href="index.php">
           <i class="fa fa-home"></i>
           Home
           <span class="sr-only">(current)</span>
           </a>
-      </li>
-     <!--  <li class="nav-item">
-        <a class="nav-link text-white" href="signup.php">
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link text-white" href="index.php">
           <i class="fa fa-plus">
-            <span class="badge badge-danger">11</span>
+            <span class="badge badge-danger"></span>
           </i>
           Signup
         </a>
-      </li> -->
+      </li>
       <li class="nav-item">
         <a class="nav-link text-white" href="login.php">
           <i class="fa fa-sign-in">
-           <!--  <span class="badge badge-warning">11</span> -->
+            <!-- <span class="badge badge-warning">  </span> --> 
           </i>
           Login
         </a>
@@ -195,23 +195,33 @@
       <li class="nav-item">
         <a class="nav-link text-white" href="user.php">
           <i class="fa fa-user-circle">
-            <span class="badge badge-success"></span>
+            <span class="badge badge-warning"></span>
           </i>
-          User
+          <?php
+          if (isset($_SESSION['name'])) 
+           {
+             echo $_SESSION['name'];
+           }
+           elseif (!isset($_SESSION['name'])) 
+           {
+             echo "User";
+           }
+           
+           ?>
         </a>
       </li>
     </ul>
     <ul class="navbar-nav">
    
       <li class="nav-item">
-        <a class="nav-link text-white" href="auth.php">
+        <a class="nav-link text-white" href="signout.php">
           <i class="fa fa-sign-out">
             <span class="badge badge-success"></span>
           </i>
           Sign Out
         </a>
       </li>
-    </ul>
+    </ul>  
 
 
    

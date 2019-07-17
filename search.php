@@ -1,4 +1,5 @@
 <?php require 'connect.php';
+session_start();
 include 'nav.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,20 +35,18 @@ include 'nav.php'; ?>
                             <label></label>
                             <select class="form-control" onchange="showUser(this.value)" name="blood">
                                 <option selected>Choose..</option>
-                                <option>A+</option>
-                                <option>A-</option>
-                                <option>B+</option>
-                                <option>B-</option>
-                                <option>AB+</option>
-                                <option>AB-</option>
-                                <option>O+</option>
-                                <option>O-</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
                             </select>
                         </div>
                       
-                       <!--  <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Search"/>
-                        </div> -->
+                       
                     </form>
                     <p class="loginhere">
                         
@@ -67,22 +66,28 @@ include 'nav.php'; ?>
     <script>
 function showUser(str) 
 {
-  if (str=="") {
+  if (str=="") 
+  {
     document.getElementById("myresult").innerHTML="";
     return;
   } 
-  if (window.XMLHttpRequest) {
+  if (window.XMLHttpRequest) 
+  {
     // code for IE7+, Firefox, Chrome, Opera, Safari
     xmlhttp=new XMLHttpRequest();
-  } else { // code for IE6, IE5
+  } 
+  else 
+  { // code for IE6, IE5
     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
-  xmlhttp.onreadystatechange=function() {
-    if (this.readyState==4 && this.status==200) {
+  xmlhttp.onreadystatechange=function() 
+  {
+    if (this.readyState==4 && this.status==200) 
+    {
       document.getElementById("myresult").innerHTML=this.responseText;
     }
   }
-  xmlhttp.open("GET","result.php?q="+str,true);
+  xmlhttp.open("GET","result.php?q="+str, true);
   xmlhttp.send();
 }
 </script>

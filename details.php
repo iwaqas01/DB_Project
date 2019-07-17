@@ -1,4 +1,5 @@
 <?php require 'connect.php';
+session_start();
 include 'nav.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +7,7 @@ include 'nav.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>Blood Bank </title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -57,35 +58,39 @@ include 'nav.php'; ?>
                             <input type="radio" name="gender" value="Female"> Female <br>
                         </div>
                          <div class="form-group col-md-6">
-                            <input type="Number" class="form-input" name="age" id="age" placeholder="Age" maxlength="2" />
+                            <input type="Number" class="form-input" name="age" id="age" placeholder="Age" maxlength="2" required />
                         </div>
                           <div class="form-group col-md-6">
-                            <input type="tel" class="form-input" name="phone" id="phone" placeholder="Phone"/>
+                            <input type="Number" class="form-input" name="phone" id="phone" placeholder="Phone" required/>
                         </div>
                         <div class="form-group col-md-6">
-                            <input type="Number" class="form-input" name="quantity" id="quantity" placeholder="Quantitiy"/>
+                            <input type="Number" class="form-input" name="quantity" id="quantity" placeholder="Quantitiy" required/>
                         </div>
                         <div class="form-group col-md-12 text-muted">
                             <label>Blood Group:</label>
-                            <select class="form-control col-md-12 text-muted" name="group">
-                                <option selected>Choose..</option>
-                                <option>A+</option>
-                                <option>A-</option>
-                                <option>B+</option>
-                                <option>B-</option>
-                                <option>AB+</option>
-                                <option>AB-</option>
-                                <option>O+</option>
-                                <option>O-</option>
+                            <select class="form-control col-md-12 text-muted" name="group" required>
+                                <option value=" " selected>Choose..</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
                             </select>
                         </div>
                          <div class="form-group col-md-12">
-                            <input type="text" class="form-input" name="address" id="address" placeholder="Address"/>
+                            <input type="text" class="form-input" name="address" id="address" placeholder="Residential Address" required/>
+                        </div>
+                         <div class="form-group col-md-12">
+                            <input type="text" class="form-input" name="branch" id="branch" placeholder="Blood Bank Branch" required/>
                         </div>
                         <?php 
                             $sql = "SELECT TOP 1 * FROM donor ORDER BY id DESC";
                             $stmt = sqlsrv_query( $conn, $sql );
-                            if( $stmt === false) {
+                            if( $stmt === false) 
+                            {
                             die( print_r( sqlsrv_errors(), true) );
                             }
 
@@ -121,8 +126,9 @@ $age=$_POST['age'];
 $qty=$_POST['quantity'];
 $blood=$_POST['group'];
 $address=$_POST['address'];
-$sql = "INSERT INTO donor_details (gender,age,phone,address,blood,quantity) VALUES (?,?,?,?,?,?)";
-$params = array($gender,$age,$phone,$address,$blood,$qty);
+$branch=$_POST['branch'];
+$sql = "INSERT INTO donor_details (gender,age,phone,address,blood,quantity,branch) VALUES (?,?,?,?,?,?,?)";
+$params = array($gender,$age,$phone,$address,$blood,$qty,$branch);
 $stmt = sqlsrv_query( $conn, $sql,$params);
 if( $stmt === false ) 
 {
